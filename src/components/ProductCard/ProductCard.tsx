@@ -1,15 +1,16 @@
 import { Product } from "../../models/product";
+import "./ProductCard.scss"
 
 const ProductCard = ({product}: {product: Product}): JSX.Element => {
     return (
-    <div>
+    <div className="product-card">
         <div className="product-image">
             <img src={product.imageUrl}></img>
         </div>
 
         <div className="product-details">
-            <div>name: {product.name}</div>
-            <div>price: {product.price}</div>
+            <div>{product.name}</div>
+            <div>{product.price} ILS</div>
         </div>
     </div>
     );

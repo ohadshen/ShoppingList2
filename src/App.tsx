@@ -1,23 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import { Product } from './models/product';
 import ProductList from './components/ProductList/ProductList';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route
+} from "react-router-dom";
+import ProductInformation from './components/ProductInformation/ProductInformation';
+import { createContext, useContext } from 'react';
 
 
 function App() {
-  const products: Product[] = [{
-    name: "necklace",
-    imageUrl: "/necklace.jpeg",
-    price: 1000
-  }, {
-    name: "bracelet",
-    imageUrl: "/bracelet.jpeg",
-    price: 300
-  }]
   return (
-    <div>
-      <ProductList products={products}></ProductList>
+    <div className='shopping-app'>
+      <h1 className='title'>Shopping!</h1>
+
+      <Router>
+        <Routes>
+          <Route path='/' element={<ProductList />}></Route>
+          <Route path='/:name' element={<ProductInformation />}></Route>
+        </Routes>
+      </Router>
     </div>
   );
 }
