@@ -5,7 +5,27 @@
     }
 }
 
-.product-list {
+.product-list-component {
     display: inline-block;
     margin: 0 auto;
+}
+
+.cart {
+    display: flex;
+    flex-direction: column;
+    width: min-content;
+
+    .cart-icon {
+        width: 70px;
+        height: 70px;
+    
+        &:hover {
+            opacity: 0.7;
+            cursor: pointer;
+        }
+    }
+    .cart-counter {
+        text-align: center;
+        margin-left: 15px;
+    }
 }
