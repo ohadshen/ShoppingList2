@@ -6,22 +6,32 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Product } from './models/product';
 import ShoppingCart from './components/ShoppingCart/ShoppingCart';
 import { products } from './data/products';
 
-const getAllProducts = (): Product[] => {
-  // TODO: GET REQ
-  return products;
+const getAllProducts = async (): Promise<Product[]> => {
+  try {
+    const res = await fetch('http://localhost:8000/products');
+    return await res.json();
+  } catch {
+    throw new Error("error GET request");
+  }
 }
 
 function App() {
+  const initProducts = async () => {
+    setProducts(await getAllProducts());
+  }
+
   const [shoppingCart, setShoppingCart] = useState<Product[]>([]);
-  const products: Product[] = getAllProducts();
+  const [products, setProducts] = useState<Product[]>([]);
+  useEffect(() => {
+    initProducts();
+  }, []);
   const addProductToCartCallback = (product:Product): void => setShoppingCart([...shoppingCart, product]);
 
-  
   return (
     <div className='shopping-app'>
       <h1 className='title'>Shopping!</h1>

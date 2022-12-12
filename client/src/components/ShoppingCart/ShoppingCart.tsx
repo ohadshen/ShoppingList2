@@ -14,7 +14,15 @@ const calculateTotalPrice = (products: Product[]): number => {
 }
 
 const buy = (shoppingCart: Product[]): void => {
-    // TODO: POST REQ
+    fetch('http://localhost:8000/shoppinglist', {
+        method: 'POST',
+        headers:{'content-type': 'application/json;charset=UTF-8'},
+        body: JSON.stringify({products: shoppingCart.map(product => ({product: {_id: product._id}}))})
+    }).then(res => {
+        alert("buy shopping cart successfuly");
+    }).catch(err => {
+        alert("error buying shopping cart");
+    });
 }
 
 const ShoppingCart = ({shoppingCart, onClick}: ShoppingCartProps): JSX.Element => {

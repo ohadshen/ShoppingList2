@@ -6,12 +6,13 @@ import productsRoute from "./routes/products";
 import shoppingListRoute from "./routes/shoppingList";
 
 dotenv.config();
-
+const cors = require('cors');
 const app: Express = express();
 const port = Number(process.env.PORT) || 3000;
 
 connectToDb();
 app.use(bodyParser.json());
+app.use(cors())
 
 app.use("/products", productsRoute);
 app.use("/shoppingList", shoppingListRoute);
