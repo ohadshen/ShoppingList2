@@ -1,19 +1,21 @@
 import express from "express";
-import { addShoppingListItem, getShoppingList } from "../dal/shoppingList";
+import { addShoppingListItems, getShoppingList } from "../dal/shoppingList";
 const router = express.Router();
 
-// a middleware function with no mount path. This code is executed for every request to the router
-router.use((req, res, next) => {
-  console.log("Time:", Date.now());
-  next();
-});
-
 router.post("/", async (req, res, next) => {
-  res.send(await addShoppingListItem(req.body));
+  try {
+    res.send(await addShoppingListItems(req.body.products));
+  } catch (error) {
+    next(error);
+  }
 });
 
 router.get("/", async (req, res, next) => {
-  res.send(await getShoppingList());
+  try {
+    res.send(await getShoppingList());
+  } catch (error) {
+    next(error);
+  }
 });
 
 export default router;

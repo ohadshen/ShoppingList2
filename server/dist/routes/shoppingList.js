@@ -15,15 +15,20 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const shoppingList_1 = require("../dal/shoppingList");
 const router = express_1.default.Router();
-// a middleware function with no mount path. This code is executed for every request to the router
-router.use((req, res, next) => {
-    console.log("Time:", Date.now());
-    next();
-});
 router.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    res.send(yield (0, shoppingList_1.addShoppingListItem)(req.body));
+    try {
+        res.send(yield (0, shoppingList_1.addShoppingListItems)(req.body.products));
+    }
+    catch (error) {
+        next(error);
+    }
 }));
 router.get("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    res.send(yield (0, shoppingList_1.getShoppingList)());
+    try {
+        res.send(yield (0, shoppingList_1.getShoppingList)());
+    }
+    catch (error) {
+        next(error);
+    }
 }));
 exports.default = router;
