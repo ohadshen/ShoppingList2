@@ -1,10 +1,11 @@
 import { IShoppingListItem, ShoppingList } from "../models/ShoppingList";
 
-export const addShoppingListItem = async (
-  shoppingListItem: IShoppingListItem
+export const addShoppingListItems = async (
+  shoppingListItems: IShoppingListItem[]
 ) => {
-  const newShoppingListItem = new ShoppingList(shoppingListItem);
-  return await newShoppingListItem.save();
+  // const newShoppingListItem = new ShoppingList(shoppingListItems[0]);
+  // return await newShoppingListItem.save();
+  return await ShoppingList.create(shoppingListItems);
 };
 
 export const getShoppingList = async () => {
