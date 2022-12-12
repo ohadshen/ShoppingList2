@@ -1,6 +1,6 @@
-.product-list-item {
+.cart {
   display: inline-block;
-  margin: 0 auto;
+  margin: 0 auto 20px auto;
 }
 
 .shopping-app {
